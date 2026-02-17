@@ -1,0 +1,10 @@
+DATI/
+OUTPUT/
+SCRIPT/
+*.pyc
+__pycache__/
+.DS_Store
+venv/
+venv_extractor/
+*.csv
+.git/
