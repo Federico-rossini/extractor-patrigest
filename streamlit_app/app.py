@@ -118,35 +118,27 @@ st.markdown("""
 
 # ============ SIDEBAR ============
 with st.sidebar:
-    # Logo Patrigest con gestione errori
+    # Loghi Patrigest + RICS
     logo_path_base = os.path.join(os.path.dirname(__file__), "IMG")
     
-    # Lista possibili nomi logo
-    possible_logos = [
-        "logo.png", 
-        "logo.jpg", 
-        "logo.jpeg",
-        "patrigest_logo.png",
-        "PATRIGEST_LOGO.png",
-        "Logo_Patrigest.png"
-    ]
+    # Logo principale Patrigest
+    logo_patrigest = os.path.join(logo_path_base, "logo.jpg")
+    if os.path.exists(logo_patrigest):
+        try:
+            st.image(logo_patrigest, use_container_width=True)
+        except:
+            pass
     
-    logo_loaded = False
+    # Logo RICS (sotto)
+    logo_rics = os.path.join(logo_path_base, "logoRICS.jpg")
+    if os.path.exists(logo_rics):
+        try:
+            st.image(logo_rics, use_container_width=True)
+        except:
+            pass
     
-    # Prova a caricare logo
-    for logo_name in possible_logos:
-        logo_file = os.path.join(logo_path_base, logo_name)
-        if os.path.exists(logo_file):
-            try:
-                st.image(logo_file, use_container_width=True)
-                logo_loaded = True
-                break
-            except Exception as e:
-                # Se fallisce caricamento, prova prossimo file
-                continue
-    
-    # Fallback: Box colorato con testo se logo non caricato
-    if not logo_loaded:
+    # Fallback se nessun logo caricato
+    if not os.path.exists(logo_patrigest) and not os.path.exists(logo_rics):
         st.markdown("""
         <div style='background: linear-gradient(135deg, #B20933 0%, #8A0726 100%); 
                     padding: 30px; 
@@ -163,6 +155,7 @@ with st.sidebar:
                       font-size: 0.9rem;'>Servizi Immobiliari</p>
         </div>
         """, unsafe_allow_html=True)
+
 
     
     st.markdown("---")
